@@ -1,0 +1,9 @@
+body {
+  background-color: ivory;
+}
+#canvas {
+  position: absolute;
+  left: 100px;
+  top: 100px;
+  border: 1px solid red;
+}
