@@ -39,16 +39,71 @@ if (!dragging || e.clientX < 0 || e.clientY < 0) return;
 })
 
 dragBox.addEventListener("mouseup",(e) => {
-  console.log(e,'mouseup event')
+  // console.log(e,'mouseup event')
     dragging = false
-    console.log(dragBox.getBoundingClientRect())
+    // console.log(dragBox)
+    // console.log(dragBox.getBoundingClientRect())
+
+    const xStart = coords.x
+    const yStart = coords.y
+    const xEnd = e.clientX;
+    const yEnd = e.clientY;
+
+    
+
+   
+
+    shapes.forEach((shape) => {
+      console.log(
+        `xShape: ${shape.x + shape.width}`,
+        `yShape: ${shape.y + shape.height}`,
+        `xStart: ${xStart}`,
+        `xEnd: ${xEnd}`,
+        `yStart: ${yStart}`,
+        `yEnd: ${yEnd}`
+
+      )
+     const shapeTop = shape.y;
+     const shapeBottom=  shape.y + shape.height;
+     const shapeLeft = shape.x;
+     const shapeRight = shape.x + shape.width
+
+    //  console.log(shape)
+
+      let toBottomRight =  false
+      let toBottomLeft = false;
+      let toTopLeft = false;
+      let toTopRight = false
+
+      if (xStart < shapeRight && xEnd > shapeLeft && yStart < shapeBottom && yEnd > shapeTop) {
+        toBottomRight = true
+      }
+      if (xStart < shapeRight && xEnd > shapeLeft && yStart > shapeTop && yEnd < shapeBottom) {
+        toTopRight = true
+      }
+
+      if (xStart > shapeLeft && xEnd < shapeRight && yStart < shapeBottom && yEnd > shapeTop) {
+        toBottomLeft = true
+      }
+      if (xStart > shapeLeft && xEnd < shapeRight && yStart > shapeTop && yEnd < shapeBottom) {
+        toTopLeft = true
+      }
+    
+      
+      if (toBottomLeft || toBottomRight || toTopLeft || toTopRight) {
+        console.log(shape)
+      }
+
+    })
     dragBox.style.opacity = 0;
     dragBox.style.width = 0;
     dragBox.style.height = 0;
+    // console.log(dragBox.getBoundingClientRect())
     // dragBox.style.display = 'none'
 
 
-  console.log(shapes)
+
+
 })
 
 // get canvas related references
@@ -75,8 +130,8 @@ shapes.push({
   isDragging: false
 });
 // define 2 circles
-shapes.push({ x: 150, y: 100, r: 10, fill: "#800080", isDragging: false });
-shapes.push({ x: 200, y: 100, r: 10, fill: "#0c64e8", isDragging: false });
+// shapes.push({ x: 150, y: 100, r: 10, fill: "#800080", isDragging: false });
+// shapes.push({ x: 200, y: 100, r: 10, fill: "#0c64e8", isDragging: false });
 
 draw();
 
@@ -104,7 +159,7 @@ function draw() {
     if (shapes[i].width) {
       rect(shapes[i]);
     } else {
-      circle(shapes[i]);
+      // circle(shapes[i]);
     }
   }
 }

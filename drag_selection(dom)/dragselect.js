@@ -79,6 +79,7 @@ function detectSelection() {
 
     if (toBottomRight || toBottomLeft || toTopLeft || toTopRight) {
       box.classList.add("selected");
+      
     } else box.classList.remove("selected");
   });
 }
@@ -104,6 +105,7 @@ function mouseDownHandler(e) {
 
 function mouseUpHandler() {
   dragging = false;
+  console.log(Array.from(document.querySelectorAll('.selected')).map(box => box.getBoundingClientRect()))
   dragBox.removeAttribute("style");
 }
 
